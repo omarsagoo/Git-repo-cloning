@@ -42,5 +42,7 @@ func main() {
 
 	// display the number of repos and length of time in the terminal.
 	since := time.Since(start).Seconds()
-	info("Cloned %d repos in %2f seconds", numOfReposCloned, since)
+	minutes := int(since / 60.0)
+	seconds := int(since) % 60
+	info("Cloned %d repos in %d minutes and %d seconds", numOfReposCloned, minutes, seconds)
 }
