@@ -33,8 +33,12 @@ func MakeClones(sheetID string, tabIndex int, column string, token string, skip 
 	sheet, err := sheets.SheetByIndex(uint(tabIndex))
 	checkIfError(err)
 
-	repoDirChan := make(chan repoDirPair, 50)
-	results := make(chan bool, 50)
+	repoDirChan := make(chan repoDirPair, 500)
+	results := make(chan int, 500)
+
+	name := sheet.Properties.Title
+	url := "https://docs.google.com/spreadsheets/d/" + sheetID
+	fmt.Printf("Google Sheet URL: %s\nSheet Name: %s\nColumn: %s (%d rows skipped)\n\n", url, name, column, skip)
 
 	var numOfDirs int
 
@@ -58,7 +62,7 @@ func MakeClones(sheetID string, tabIndex int, column string, token string, skip 
 						repoURL = "https://" + prefix + cell.Value
 					}
 
-					warning("creating directory %s...", directory)
+					// warning("creating directory %s...", directory)
 					err = os.MkdirAll(directory, os.ModePerm)
 					checkIfError(err)
 
@@ -72,22 +76,19 @@ func MakeClones(sheetID string, tabIndex int, column string, token string, skip 
 
 	// close the channel that was storing the repo struct
 	close(repoDirChan)
-	// unload the results n, where n is the number of repos cloned, times
-	for a := 1; a <= numOfDirs; a++ {
-		<-results
-	}
+	progressBar(numOfDirs, results)
 }
 
 // worker to pass the information from the struct into the clone helper function
-func cloneWorker(pairs chan repoDirPair, results chan<- bool) {
+func cloneWorker(pairs chan repoDirPair, results chan int) {
 	for pair := range pairs {
 		results <- clone(pair.Token, pair.RepoURL, pair.Dir)
 	}
 }
 
 // cloning herlper function to work with the channels to clone the repos
-func clone(token, repoURL, directory string) bool {
-	info("cloning %s into %s...", repoURL, directory)
+func clone(token, repoURL, directory string) int {
+	// info("cloning %s into %s...", repoURL, directory)
 	_, err := g.PlainClone(directory, false, &g.CloneOptions{
 		Auth: &http.BasicAuth{
 			Username: "makeclones", // This can be anything except an empty string
@@ -101,30 +102,7 @@ func clone(token, repoURL, directory string) bool {
 
 	if err == nil {
 		numOfReposCloned++
-		return true
+		return 1
 	}
-	return false
-}
-
-// checkIfError should be used to naively panic if an error is not nil.
-func checkIfError(err error) {
-	if err == nil {
-		return
-	}
-	fmt.Printf("[makeclones] \x1b[31;1m%s\x1b[0m\n", fmt.Sprintf("%s", err))
-	//os.Exit(1)
-}
-
-// info should be used to describe the example commands that are about to run.
-func info(format string, args ...interface{}) {
-	fmt.Printf("[makeclones] \x1b[32;1m%s\x1b[0m\n", fmt.Sprintf(format, args...))
-}
-
-// warning should be used to display a warning
-func warning(format string, args ...interface{}) {
-	fmt.Printf("[makeclones] \x1b[36;1m%s\x1b[0m\n", fmt.Sprintf(format, args...))
-}
-
-func completed(format string, args ...interface{}) {
-	fmt.Printf("[COMPLETED] \x1b[36;1m%s\x1b[0m\n", fmt.Sprintf(format, args...))
+	return 0
 }

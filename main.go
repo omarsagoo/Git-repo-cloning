@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"os"
 	"time"
 )
@@ -22,6 +23,8 @@ func main() {
 	flag.IntVar(&tabIndex, "tab", 0, "Spreadsheet tab to look for the specified column")
 
 	flag.Parse()
+
+	showBanner()
 
 	if sheet == "" {
 		flag.PrintDefaults()
@@ -44,5 +47,14 @@ func main() {
 	since := time.Since(start).Seconds()
 	minutes := int(since / 60.0)
 	seconds := int(since) % 60
+
+	size := dirSize("github.com/")
+	sizeStr := fmt.Sprintf("%.2f MB", size)
+
+	if size > 1000 {
+		size = size / 1000
+		sizeStr = fmt.Sprintf("%.2f GB", size)
+	}
 	completed("Cloned %d repos in %d minutes and %d seconds", numOfReposCloned, minutes, seconds)
+	pathComplete("github.com/https:/github.com/ (%s)", sizeStr)
 }

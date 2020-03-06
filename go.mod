@@ -3,15 +3,19 @@ module github.com/droxey/makeclones
 require (
 	github.com/BriantOliveira/DependencyLibrary v0.0.0-20190308165024-2de3c82bc269 // indirect
 	github.com/ajstarks/svgo v0.0.0-20181006003313-6ce6a3bcf6cd // indirect
+	github.com/apoorvam/goterminal v0.0.0-20180523175556-614d345c47e5
 	github.com/connor-cahill/goCal v0.0.0-20190309232843-7eb87a39cde9 // indirect
 	github.com/debber/debber-v0.3 v0.0.0-20160226200915-cf10fd052975 // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
-	github.com/fatih/color v1.7.0 // indirect
+	github.com/fatih/color v1.7.0
 	github.com/go-chi/chi v4.0.2+incompatible // indirect
 	github.com/go-chi/render v1.0.1 // indirect
 	github.com/google/go-querystring v1.0.0 // indirect
 	github.com/gorilla/mux v1.7.0 // indirect
+	github.com/gosuri/uilive v0.0.4 // indirect
+	github.com/gosuri/uiprogress v0.0.1 // indirect
 	github.com/graphql-go/graphql v0.7.7 // indirect
+	github.com/inhies/go-bytesize v0.0.0-20151001220322-5990f52c6ad6
 	github.com/jakeTran42/go-graphql v0.0.0-20190308220101-85d84166b94f // indirect
 	github.com/jinzhu/gorm v1.9.2 // indirect
 	github.com/jinzhu/inflection v0.0.0-20180308033659-04140366298a // indirect

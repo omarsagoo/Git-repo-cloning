@@ -21,8 +21,6 @@ brew install makeclones
 
 ```bash
 $ makeclones
-  -analyze bool
-        EXPERIMENTAL in v2. Add to SonarQube for analysis.
   -column string
         Column to scrape. Make sure data is in the format username/reponame (Required)
   -sheet string
