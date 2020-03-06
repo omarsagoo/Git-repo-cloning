@@ -93,8 +93,9 @@ func clone(token, repoURL, directory string) bool {
 			Username: "makeclones", // This can be anything except an empty string
 			Password: token,
 		},
-		URL:      repoURL,
-		Progress: os.Stdout,
+		URL: repoURL,
+		// Progress: os.Stdout,
+		Progress: nil,
 	})
 	checkIfError(err)
 
@@ -122,4 +123,8 @@ func info(format string, args ...interface{}) {
 // warning should be used to display a warning
 func warning(format string, args ...interface{}) {
 	fmt.Printf("[makeclones] \x1b[36;1m%s\x1b[0m\n", fmt.Sprintf(format, args...))
+}
+
+func completed(format string, args ...interface{}) {
+	fmt.Printf("[COMPLETED] \x1b[36;1m%s\x1b[0m\n", fmt.Sprintf(format, args...))
 }

@@ -44,5 +44,5 @@ func main() {
 	since := time.Since(start).Seconds()
 	minutes := int(since / 60.0)
 	seconds := int(since) % 60
-	info("Cloned %d repos in %d minutes and %d seconds", numOfReposCloned, minutes, seconds)
+	completed("Cloned %d repos in %d minutes and %d seconds", numOfReposCloned, minutes, seconds)
 }
