@@ -1,0 +1,111 @@
+project_name: Git-repo-cloning
+release:
+  github:
+    owner: omarsagoo
+    name: Git-repo-cloning
+  name_template: '{{.Tag}}'
+brews:
+- name: Git-repo-cloning
+  github:
+    owner: omarsagoo
+    name: MakeClones
+  commit_author:
+    name: goreleaserbot
+    email: goreleaser@carlosbecker.com
+  folder: Formula
+  install: bin.install "makeclones"
+  description: MakeClones to clone repos from a google sheet
+  homepage: https://github.com/omarsagoo/Git-repo-cloning
+  goarm: "6"
+scoop:
+  name: Git-repo-cloning
+  commit_author:
+    name: goreleaserbot
+    email: goreleaser@carlosbecker.com
+builds:
+- id: makeclones-darwin-amd64
+  goos:
+  - darwin
+  goarch:
+  - amd64
+  goarm:
+  - "6"
+  targets:
+  - darwin_amd64
+  ignore:
+  - goos: Darwin
+    goarch: "386"
+    goarm: ""
+    gomips: ""
+  dir: .
+  main: ./main.go
+  ldflags:
+  - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}}
+    -X main.builtBy=goreleaser
+  binary: makeclones
+  env:
+  - CGO_ENABLED=0
+  lang: go
+archives:
+- id: default
+  builds:
+  - makeclones-darwin-amd64
+  name_template: '{{.ProjectName}}_{{.Version}}_{{.Os}}-{{.Arch}}'
+  replacements:
+    "386": 32bit
+    amd64: 64bit
+    arm: ARM
+    arm64: ARM64
+    darwin: macOS
+    dragonfly: DragonFlyBSD
+    freebsd: FreeBSD
+    linux: Linux
+    netbsd: NetBSD
+    openbsd: OpenBSD
+    windows: Windows
+  format: tar.gz
+  format_overrides:
+  - goos: windows
+    format: zip
+  files:
+  - README.md
+  - LICENSE
+  - comline.go
+  - makeclones.go
+snapshot:
+  name_template: '{{ .Tag }}-next'
+checksum:
+  name_template: checksums.txt
+  algorithm: sha256
+changelog:
+  filters:
+    exclude:
+    - '^docs:'
+    - '^test:'
+    - README
+    - Merge pull request
+    - Merge branch
+  sort: asc
+dist: dist
+signs:
+- id: default
+  cmd: gpg
+  args:
+  - --output
+  - $signature
+  - --detach-sig
+  - $artifact
+  signature: ${artifact}.sig
+  artifacts: none
+env_files:
+  github_token: ~/.config/goreleaser/github_token
+  gitlab_token: ~/.config/goreleaser/gitlab_token
+  gitea_token: ~/.config/goreleaser/gitea_token
+before:
+  hooks:
+  - go mod tidy
+  - go mod download
+github_urls:
+  download: https://github.com
+gitlab_urls:
+  download: https://gitlab.com
