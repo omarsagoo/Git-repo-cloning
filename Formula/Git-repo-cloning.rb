@@ -2,12 +2,12 @@
 class GitRepoCloning < Formula
   desc "MakeClones to clone repos from a google sheet"
   homepage "https://github.com/omarsagoo/Git-repo-cloning"
-  version "1.0.9"
+  version "1.1.1"
   bottle :unneeded
 
   if OS.mac?
-    url "https://github.com/omarsagoo/Git-repo-cloning/releases/download/v1.0.9/Git-repo-cloning_1.0.9_macOS-64bit.tar.gz"
-    sha256 "72d0cf261f306d8ae8db24bcf932e9cea29ec6be14fb74ae7eab0f17bd9fedf1"
+    url "https://github.com/omarsagoo/Git-repo-cloning/releases/download/v1.1.1/Git-repo-cloning_1.1.1_macOS-64bit.tar.gz"
+    sha256 "812f5f50ca3b4bc255c748434dceec2bd18e8f19a7f41c8e9b4fdf806d33ce80"
   elsif OS.linux?
   end
 
