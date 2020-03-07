@@ -8,7 +8,7 @@ brews:
 - name: Git-repo-cloning
   github:
     owner: omarsagoo
-    name: MakeClones
+    name: git-repo-cloning
   commit_author:
     name: goreleaserbot
     email: goreleaser@carlosbecker.com
