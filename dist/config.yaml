@@ -38,7 +38,7 @@ builds:
     goarm: ""
     gomips: ""
   dir: .
-  main: ./main.go
+  main: .
   ldflags:
   - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}}
     -X main.builtBy=goreleaser
@@ -70,8 +70,6 @@ archives:
   files:
   - README.md
   - LICENSE
-  - comline.go
-  - makeclones.go
 snapshot:
   name_template: '{{ .Tag }}-next'
 checksum:
