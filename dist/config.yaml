@@ -101,7 +101,6 @@ env_files:
   gitea_token: ~/.config/goreleaser/gitea_token
 before:
   hooks:
-  - go mod tidy
   - go mod download
 github_urls:
   download: https://github.com
