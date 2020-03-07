@@ -13,7 +13,7 @@ brews:
     name: goreleaserbot
     email: goreleaser@carlosbecker.com
   folder: Formula
-  install: bin.install "makeclones"
+  install: bin.install "git-repo-cloning"
   description: MakeClones to clone repos from a google sheet
   homepage: https://github.com/omarsagoo/Git-repo-cloning
   goarm: "6"
@@ -42,7 +42,7 @@ builds:
   ldflags:
   - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}}
     -X main.builtBy=goreleaser
-  binary: makeclones
+  binary: git-repo-cloning
   env:
   - CGO_ENABLED=0
   lang: go
