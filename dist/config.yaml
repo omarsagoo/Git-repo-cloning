@@ -70,6 +70,7 @@ archives:
   files:
   - README.md
   - LICENSE
+  - client_secret.json
 snapshot:
   name_template: '{{ .Tag }}-next'
 checksum:
