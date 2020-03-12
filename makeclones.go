@@ -95,7 +95,7 @@ func clone(token, repoURL, directory string) int {
 			Password: token,
 		},
 		URL: repoURL,
-		// Progress: os.Stdout,
+		// do not want any progress info sent to the terminal.
 		Progress: nil,
 	})
 	checkIfError(err)
