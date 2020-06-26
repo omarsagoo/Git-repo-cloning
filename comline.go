@@ -21,7 +21,7 @@ func checkIfError(err error) {
 
 // info should be used to describe the example commands that are about to run.
 func info(format string, args ...interface{}) {
-	fmt.Printf("[makeclones] \x1b[32;1m%s\x1b[0m\n", fmt.Sprintf(format, args...))
+	fmt.Printf("\n[makeclones] \x1b[32;1m%s\x1b[0m\n", fmt.Sprintf(format, args...))
 }
 
 // warning should be used to display a warning
@@ -31,12 +31,12 @@ func warning(format string, args ...interface{}) {
 
 // completed to display a comlpleted status when all repos are fully cloned
 func completed(format string, args ...interface{}) {
-	fmt.Printf("[COMPLETED] \x1b[36;1m%s\x1b[0m\n", fmt.Sprintf(format, args...))
+	fmt.Printf("\n[COMPLETED] \x1b[36;1m%s\x1b[0m\n", fmt.Sprintf(format, args...))
 }
 
 // displays the path all of the repos where saved to.
 func pathComplete(format string, args ...interface{}) {
-	fmt.Printf("[Saved to path] \x1b[36;1m%s\x1b[0m\n", fmt.Sprintf(format, args...))
+	fmt.Printf("\n[Saved to path] \x1b[36;1m%s\x1b[0m\n", fmt.Sprintf(format, args...))
 }
 
 // shows the MakeClones banner in the terminal when the program is initially run
