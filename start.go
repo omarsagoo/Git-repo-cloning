@@ -28,17 +28,7 @@ func start() {
 
 	showBanner()
 
-	if sheet == "" {
-		flag.PrintDefaults()
-		os.Exit(1)
-	}
-
-	if column == "" {
-		flag.PrintDefaults()
-		os.Exit(1)
-	}
-
-	if authToken == "" {
+	if sheet == "" ||  column == "" || authToken == "" {
 		flag.PrintDefaults()
 		os.Exit(1)
 	}
